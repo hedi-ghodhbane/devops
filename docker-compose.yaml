@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  sonarQube:
+    image: sonarqube
+    container_name: sonarQube-container
+    ports:
+      - 9000:9000
+
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins-container
+    ports:
+      - 8082:8080
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+  nexus:
+    image: sonatype/nexus3
+    container_name: nexus-container
+    ports:
+      - 8081:8081
+    environment:
+      - MAX_HEAP=768m
+
+volumes:
+  jenkins_home:
